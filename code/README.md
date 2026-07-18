@@ -1,57 +1,59 @@
-# Intelligent OCR API
+# ⚙️ Inference Engine & API
 
-A high-performance FastAPI microservice for handwritten digit recognition using a custom neural network.
+[![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-Headless-5C3EE8?logo=opencv&logoColor=white)](https://opencv.org/)
 
-## Architecture & Pipeline
+This directory houses the core intelligence of the application: a custom Optical Character Recognition (OCR) neural network exposed via a high-performance FastAPI microservice.
 
-* **Request:** Client submits `multipart/form-data` containing an image file to `POST /predict`.
-* **In-Memory Byte Extraction:** Raw bytes are decoded directly into an OpenCV numpy array without disk I/O.
-* **OpenCV Preprocessing:** Image is converted to grayscale, thresholded (Otsu's binarization), cropped to the character's bounding box, and resized to a strict 20x20 grid.
-* **Mathematical ML Inference:** The grid is flattened into a normalized 400-element vector and fed forward through the pre-loaded custom neural network.
-* **Response:** API returns a strictly typed JSON payload containing the predicted digit.
+## 🧠 Why Build From Scratch?
 
-## Performance Metrics
+While using TensorFlow or PyTorch is standard practice, this model was implemented from scratch using **pure mathematics and NumPy matrix operations**. 
 
-* **Training Data:** Model weights (`nn.json`) are trained from scratch on the standard MNIST dataset. Note: `scikit-learn` is used strictly as a utility to fetch the MNIST dataset during the offline training phase (`train.py`).
-* **Inference Engine:** 100% custom mathematical implementation utilizing NumPy matrix operations. Zero dependencies on TensorFlow, PyTorch, or Scikit-Learn for runtime inference.
-* **Accuracy:** [XX]%
+**For recruiters and engineers**, this demonstrates:
+1. Deep understanding of fundamental Machine Learning concepts (Backpropagation, Gradient Descent, Activation Functions).
+2. Ability to optimize memory and execution time without relying on heavy abstract frameworks.
+3. Competency in translating raw mathematical formulas into efficient, production-ready Python code.
 
-## API Contract
+## 🔄 The Data Pipeline
 
-**Endpoint:** `POST /predict`
-**Method:** `POST`
+When an image is submitted to the API, it goes through a strict processing pipeline:
+
+1. **In-Memory Extraction:** Raw bytes are decoded directly into an OpenCV matrix. Zero disk I/O ensures sub-millisecond read times.
+2. **Computer Vision (OpenCV):**
+   * Converted to grayscale.
+   * Otsu's Binarization is applied to separate the character from the background.
+   * Contours are analyzed to draw a bounding box around the digit.
+   * Cropped and resized strictly to a `20x20` grid.
+3. **Matrix Flattening:** The grid is normalized and flattened into a 400-element vector.
+4. **Feedforward Neural Network:** The vector passes through the hidden layers of our custom network to produce a prediction (0-9).
+
+## 📡 API Contract
+
+**Endpoint:** `POST /predict`  
 **Content-Type:** `multipart/form-data`
 
-### cURL Example
-
+**Request Example:**
 ```bash
 curl -X POST "http://localhost:8000/predict" \
   -H "accept: application/json" \
   -H "Content-Type: multipart/form-data" \
-  -F "file=@/path/to/handwritten_digit.png"
+  -F "file=@/path/to/digit.png"
 ```
 
-### JSON Response
-
+**JSON Response:**
 ```json
 {
   "prediction": 7,
-  "status": "success",
-  "type": "test",
-  "result": 7
+  "status": "success"
 }
 ```
-*(Note: 'type' and 'result' keys are maintained strictly for legacy frontend compatibility)*
 
-## Local Development / Setup
+## 🛠️ Development
 
+To test the backend locally without the frontend:
 ```bash
-python -m venv venv
-venv\Scripts\activate
-pip install fastapi uvicorn opencv-python numpy python-multipart scikit-learn
+cd code
 uvicorn main:app --host localhost --port 8000 --reload
 ```
-
-## Documentation
-
-Full interactive OpenAPI documentation (Swagger UI) is automatically generated and accessible at `http://localhost:8000/docs` while the server is running locally.
+Navigate to `http://localhost:8000/docs` to use the interactive Swagger UI.

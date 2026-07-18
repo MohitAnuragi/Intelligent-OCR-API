@@ -1,32 +1,35 @@
-# React + TypeScript + Vite
+# 🎨 Frontend User Interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-3178C6?logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-5.0-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-11.0-0055FF?logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
-Currently, two official plugins are available:
+This directory contains the user-facing application for the Intelligent OCR System. It is designed to provide a seamless, premium, and highly interactive experience for users submitting images for prediction.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🎯 Design Philosophy
 
-## React Compiler
+A backend is only as good as the interface that exposes it. This frontend was engineered with **extreme attention to detail**:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **State-Driven UX:** The application fluidly transitions through 5 distinct UI states (`idle`, `dragging`, `loading`, `success`, `error`) ensuring the user is always informed of the system's status.
+2. **Micro-Interactions:** Using `framer-motion`, every user action triggers a physical response—from the bouncy drag-and-drop scale effect to the simulated "laser scanning" line during network requests.
+3. **Modern Aesthetics:** Utilizes Tailwind CSS for complex glassmorphism (backdrop blurs, translucent borders) and dynamic background glow effects that react to application state.
+4. **Type Safety:** 100% written in strict TypeScript to prevent runtime errors and ensure a robust contract with the FastAPI backend.
 
-## Expanding the Oxlint configuration
+## 🏗️ Architecture & Tools
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+* **Vite:** Chosen over Create React App (CRA) for lightning-fast Hot Module Replacement (HMR) and optimized build times.
+* **Axios:** For structured, interceptor-ready HTTP requests handling `multipart/form-data` flawlessly.
+* **Tailwind Merge (`twMerge` / `clsx`):** Implemented utility functions to safely merge conditional Tailwind classes without specificity conflicts.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## 🚀 Running Locally
+
+Ensure you have Node.js installed, then run:
+
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+The application will be available at `http://localhost:5173`. Make sure the Python backend is running simultaneously on `http://localhost:8000` so predictions can be processed!
