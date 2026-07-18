@@ -1,4 +1,4 @@
-# 🧠 Intelligent OCR API System
+#  Intelligent OCR API System
 
 ![OCR System Cover Image](https://socialify.git.ci/MohitAnuragi/Intelligent-OCR-API/image?description=1&font=Inter&language=1&name=1&owner=1&pattern=Circuit%20Board&theme=Dark)
 
@@ -12,7 +12,7 @@ Welcome to the **Intelligent OCR API System**. This project is a modern, full-st
 
 Instead of relying on heavy pre-packaged ML frameworks like TensorFlow or PyTorch, this project features a **custom Neural Network written from scratch** alongside a **hardware-accelerated React interface**.
 
-## ✨ Key Features
+##  Key Features
 
 * **Custom Neural Network:** A multi-layer perceptron (MLP) built from the ground up using core mathematics and NumPy matrix operations.
 * **Computer Vision Pipeline:** Real-time image binarization, thresholding, and contour mapping using OpenCV.
@@ -20,7 +20,7 @@ Instead of relying on heavy pre-packaged ML frameworks like TensorFlow or PyTorc
 * **Asynchronous API:** Highly concurrent RESTful endpoints powered by FastAPI and Uvicorn.
 * **Containerized Deployment:** Ready for the cloud with a minimal, optimized Docker footprint.
 
-## 📁 Monorepo Structure
+##  Monorepo Structure
 
 This repository separates concerns into two specialized workspaces:
 
@@ -34,7 +34,7 @@ This repository separates concerns into two specialized workspaces:
 
 ---
 
-## 🚀 Quick Start Guide
+##  Quick Start Guide
 
 You can run the entire system locally in under 2 minutes.
 
@@ -56,7 +56,7 @@ npm run dev
 
 ---
 
-## 🐳 Docker Deployment
+##  Docker Deployment
 
 The system is fully containerized for easy cloud deployment (Render, AWS, Railway, etc.).
 
