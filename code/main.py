@@ -112,6 +112,10 @@ def preprocess_image(image_bytes: bytes) -> List[int]:
     return normalized_vector
 
 # CLEAN APIS: Expose a clean, single asynchronous POST endpoint
+@app.get("/")
+async def root():
+    return {"message": "OCR API is running. Use /predict to submit images."}
+
 @app.post("/predict", response_model=PredictResponse)
 async def predict_digit(file: UploadFile = File(...)):
     """
